@@ -37,6 +37,13 @@ data class AddNew(
         )
     }
 
+    fun update(new: New): New {
+        return new.copy(
+            title = title,
+            text = text
+        )
+    }
+
     companion object {
         private val idGenerator = AtomicInteger(0)
     }
@@ -63,7 +70,8 @@ fun main() {
             put("/{id}") {
                 val id: Int by call.parameters
                 val addNew = call.receive<AddNew>()
-                val new = addNew.toNew()
+                val oldNew = news.first { it.id == id }
+                val new = addNew.update(oldNew)
                 news.replaceAll { if (it.id == id) new else it }
                 call.respondText("")
             }
