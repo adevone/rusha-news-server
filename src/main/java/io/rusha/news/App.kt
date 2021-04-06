@@ -61,10 +61,10 @@ fun main() {
             get("/") {
                 call.respond(news)
             }
-            patch("/add") {
+            post("/add") {
                 val addNew = call.receive<AddNew>()
                 val new = addNew.toNew()
-                news.add(new)
+                news.add(0, new)
                 call.respondText("")
             }
             put("/{id}") {
