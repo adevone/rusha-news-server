@@ -44,7 +44,8 @@ data class AddNew(
 fun main() {
     val news = mutableListOf<New>()
 
-    embeddedServer(Netty, port = 8000) {
+    val port = System.getenv("PORT").toInt()
+    embeddedServer(Netty, port = port) {
         install(ContentNegotiation) {
             json()
         }
