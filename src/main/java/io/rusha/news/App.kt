@@ -12,6 +12,7 @@ import io.ktor.util.*
 import kotlinx.serialization.Serializable
 import java.text.SimpleDateFormat
 import java.util.*
+import java.util.concurrent.CopyOnWriteArrayList
 import java.util.concurrent.atomic.AtomicInteger
 
 @Serializable
@@ -42,7 +43,7 @@ data class AddNew(
 }
 
 fun main() {
-    val news = mutableListOf<New>()
+    val news = CopyOnWriteArrayList<New>()
 
     val port = System.getenv("PORT").toInt()
     embeddedServer(Netty, port = port) {
